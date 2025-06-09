@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Labs Program Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 350px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+                max-height: 400px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-[#004AAD]">Deep Funding LABS Program</h1>
+            <p class="text-lg text-gray-600 mt-2">A Visual Guide to Our Rapid Prototyping Initiative</p>
+        </header>
+
+        <main class="space-y-12">
+            <section id="introduction" class="text-center bg-white p-8 rounded-lg shadow-lg">
+                 <h2 class="text-3xl font-bold text-[#0062C7] mb-4">Launching with a Focused & Agile Structure</h2>
+                 <p class="max-w-3xl mx-auto text-gray-700 mb-6">Deep Labs is kicking off as a lean, powerful initiative designed for rapid innovation. The program is built around small, dedicated teams called pods, ensuring agility and a clear focus on building next-generation AI solutions.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="flex flex-col items-center justify-center p-6 bg-blue-50 rounded-lg">
+                        <span class="text-7xl font-extrabold text-[#004AAD]">4</span>
+                        <span class="text-xl font-semibold text-gray-700 mt-2">Prototyping Pods</span>
+                    </div>
+                    <div class="flex flex-col items-center justify-center p-6 bg-blue-50 rounded-lg">
+                        <span class="text-7xl font-extrabold text-[#004AAD]">12</span>
+                        <span class="text-xl font-semibold text-gray-700 mt-2">Dedicated Specialists</span>
+                    </div>
+                    <div class="flex flex-col items-center justify-center p-6 bg-blue-50 rounded-lg">
+                        <span class="text-7xl font-extrabold text-[#004AAD]">4</span>
+                        <span class="text-xl font-semibold text-gray-700 mt-2">Shared Experts</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="structure" class="bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold text-center text-[#0062C7] mb-2">Program Structure & Resources</h2>
+                <p class="text-center text-gray-700 mb-8 max-w-3xl mx-auto">The program's strength lies in its pod-based structure, which combines dedicated specialists with shared expertise for maximum efficiency and collaboration.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-[#004AAD] mb-4">Pod Composition</h3>
+                        <p class="text-gray-700 mb-6">Each of the four pods is a self-contained unit of builders, equipped with the essential skills to take an idea from concept to reality. This diverse skill set ensures a holistic approach to development.</p>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-blue-100 rounded-lg flex items-center">
+                                <span class="text-2xl mr-4">💻</span>
+                                <div>
+                                    <h4 class="font-bold text-[#004AAD]">1 Developer</h4>
+                                    <p class="text-sm text-gray-600">Builds the core application and infrastructure.</p>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-blue-100 rounded-lg flex items-center">
+                                <span class="text-2xl mr-4">📊</span>
+                                <div>
+                                    <h4 class="font-bold text-[#004AAD]">1 Data Analyst/Engineer</h4>
+                                    <p class="text-sm text-gray-600">Manages data pipelines and extracts insights.</p>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-blue-100 rounded-lg flex items-center">
+                                <span class="text-2xl mr-4">🤖</span>
+                                <div>
+                                    <h4 class="font-bold text-[#004AAD]">1 ML/AI Specialist</h4>
+                                    <p class="text-sm text-gray-600">Implements machine learning models and algorithms.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="resourceAllocationChart"></canvas>
+                        <p class="text-center text-sm text-gray-600 mt-2">Represents the ratio of dedicated pod members to shared experts across the entire program.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="process" class="bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold text-center text-[#0062C7] mb-2">The Rapid Prototyping Lifecycle</h2>
+                <p class="text-center text-gray-700 mb-10 max-w-3xl mx-auto">Our process is designed for speed and effectiveness, moving ideas from initial concept to a potential Minimum Viable Product (MVP) within a structured, time-boxed framework.</p>
+                <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 justify-center items-center">
+                    <div class="w-full md:w-1/3 p-4 border-2 border-dashed border-gray-300 rounded-lg text-center">
+                        <h3 class="text-xl font-semibold text-[#004AAD]">1. Idea Intake</h3>
+                        <p class="text-gray-600 mt-2">Ideas are sourced from the Design Workshop and a continuous intake form.</p>
+                    </div>
+                    <div class="text-2xl text-[#007BFF] transform md:rotate-0 rotate-90">➔</div>
+                    <div class="w-full md:w-1/3 p-4 border-2 border-dashed border-gray-300 rounded-lg text-center">
+                        <h3 class="text-xl font-semibold text-[#004AAD]">2. Prioritization</h3>
+                        <p class="text-gray-600 mt-2">The Product & Operations clusters select the most promising ideas.</p>
+                    </div>
+                    <div class="text-2xl text-[#007BFF] transform md:rotate-0 rotate-90">➔</div>
+                    <div class="w-full md:w-1/3 p-4 border-2 border-dashed border-gray-300 rounded-lg text-center">
+                        <h3 class="text-xl font-semibold text-[#004AAD]">3. Pod Selection</h3>
+                        <p class="text-gray-600 mt-2">Each pod chooses a prioritized idea to prototype.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="timeline" class="bg-white p-8 rounded-lg shadow-lg">
+                 <h2 class="text-3xl font-bold text-center text-[#0062C7] mb-2">Time-boxed for Success</h2>
+                 <p class="text-center text-gray-700 mb-8 max-w-3xl mx-auto">Each idea is given a dedicated amount of time to prove its value. This two-phased approach ensures resources are invested wisely, with a clear path for successful prototypes to receive further development.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div class="chart-container">
+                        <canvas id="mvpTimelineChart"></canvas>
+                         <p class="text-center text-sm text-gray-600 mt-2">Visualizes the two-phase timeline for each prototype.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-[#004AAD] mb-4">Development Phases</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <span class="text-xl text-green-500 mr-3">✔</span>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Phase 1: MVP Development (50 Hours)</h4>
+                                    <p class="text-gray-600">The initial sprint to build a core, functional prototype and demonstrate the idea's potential.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-xl text-blue-500 mr-3">🚀</span>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Phase 2: Extended Prototype (50 Additional Hours)</h4>
+                                    <p class="text-gray-600">Awarded to successful MVPs that justify further investment. Pods receive a completion bonus.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="cadence" class="bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold text-center text-[#0062C7] mb-2">Weekly Collaboration Cadence</h2>
+                 <p class="text-center text-gray-700 mb-8 max-w-3xl mx-auto">A structured meeting schedule keeps the pods aligned, unblocked, and motivated. This cadence facilitates focused work while ensuring constant communication and celebration of progress.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-6 bg-blue-50 rounded-lg text-center">
+                        <h3 class="font-bold text-xl text-[#004AAD]">Pod Meeting</h3>
+                        <p class="text-4xl font-extrabold text-[#007BFF] my-2">1</p>
+                        <p class="text-gray-600">hour weekly session for deep dives, planning, and technical problem-solving within each pod.</p>
+                    </div>
+                     <div class="p-6 bg-red-50 rounded-lg text-center">
+                        <h3 class="font-bold text-xl text-red-800">Blocker Stand-up</h3>
+                        <p class="text-4xl font-extrabold text-red-500 my-2">30</p>
+                        <p class="text-gray-600">minutes weekly, focused exclusively on identifying and resolving impediments.</p>
+                    </div>
+                    <div class="p-6 bg-green-50 rounded-lg text-center">
+                        <h3 class="font-bold text-xl text-green-800">Wins Stand-up</h3>
+                        <p class="text-4xl font-extrabold text-green-500 my-2">30</p>
+                        <p class="text-gray-600">minutes weekly to celebrate achievements, share successes, and boost morale.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="ecosystem" class="bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold text-center text-[#0062C7] mb-2">Connecting the Ecosystem</h2>
+                <p class="text-center text-gray-700 mb-10 max-w-3xl mx-auto">Deep Labs doesn't operate in a silo. It's a central hub designed to connect and collaborate with the key clusters of the Deep Funding organization, acting as a bridge between ideas and execution.</p>
+                <div class="relative flex justify-center items-center p-6 min-h-[300px]">
+                    <div class="absolute w-48 h-48 bg-[#007BFF] rounded-full flex items-center justify-center">
+                        <span class="text-white text-2xl font-bold">DF LABS</span>
+                    </div>
+                    <div class="absolute" style="transform: rotate(45deg) translate(150px) rotate(-45deg);">
+                        <div class="w-40 p-3 bg-blue-100 text-center rounded-lg shadow">Community & Outreach</div>
+                    </div>
+                    <div class="absolute" style="transform: rotate(135deg) translate(150px) rotate(-135deg);">
+                        <div class="w-40 p-3 bg-blue-100 text-center rounded-lg shadow">Operations & Review</div>
+                    </div>
+                    <div class="absolute" style="transform: rotate(225deg) translate(150px) rotate(-225deg);">
+                        <div class="w-40 p-3 bg-blue-100 text-center rounded-lg shadow">Product & BizDev</div>
+                    </div>
+                    <div class="absolute" style="transform: rotate(315deg) translate(150px) rotate(-315deg);">
+                        <div class="w-40 p-3 bg-blue-100 text-center rounded-lg shadow">Governance</div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center mt-12 py-6 border-t border-gray-300">
+            <h3 class="text-2xl font-bold text-[#0062C7]">Ready to Build the Future?</h3>
+            <p class="text-gray-600 my-3">We are actively seeking passionate volunteers to drive AI-driven solutions.</p>
+            <a href="#" class="inline-block bg-[#007BFF] text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-[#0062C7] transition-colors">Join the Deep Labs Circle!</a>
+        </footer>
+    </div>
+
+    <script>
+        function wrapLabel(label, maxWidth) {
+            if (label.length <= maxWidth) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + ' ' + word).trim().length > maxWidth) {
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            }
+            if (currentLine) {
+                lines.push(currentLine.trim());
+            }
+            return lines;
+        }
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            } else {
+                return label;
+            }
+        };
+
+        const chartOptionsTemplate = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                }
+            }
+        };
+
+        const brilliantBlues = ['#004AAD', '#007BFF', '#4DA3FF', '#80BFFF', '#0062C7'];
+
+        const resourceCtx = document.getElementById('resourceAllocationChart').getContext('2d');
+        new Chart(resourceCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Dedicated Pod Specialists', 'Shared Experts (PM & QA)'],
+                datasets: [{
+                    label: 'Resource Allocation',
+                    data: [12, 4],
+                    backgroundColor: [brilliantBlues[0], brilliantBlues[2]],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                ...chartOptionsTemplate,
+                 cutout: '70%',
+            }
+        });
+
+        const timelineCtx = document.getElementById('mvpTimelineChart').getContext('2d');
+        new Chart(timelineCtx, {
+            type: 'bar',
+            data: {
+                labels: ['MVP Phase', ['Extended', 'Prototype Phase']],
+                datasets: [{
+                    label: 'Hours Allocated',
+                    data: [50, 50],
+                    backgroundColor: [brilliantBlues[1], brilliantBlues[4]],
+                    borderColor: brilliantBlues[0],
+                    borderWidth: 1,
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                ...chartOptionsTemplate,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                         title: {
+                            display: true,
+                            text: 'Hours'
+                        }
+                    }
+                },
+                 plugins: {
+                    legend: {
+                       display: false
+                    },
+                    tooltip: {
+                       callbacks: {
+                           title: tooltipTitleCallback
+                       }
+                   }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
