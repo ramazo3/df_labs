@@ -155,6 +155,66 @@
             </div>
         </form>
     </div>
+    <script>
+        const form = document.getElementById('ideaForm');
+        const submitButton = document.getElementById('submitButton');
+        const formMessage = document.getElementById('formMessage');
 
+        // IMPORTANT: Replace this with the actual URL of your deployed Cloud Function
+        const CLOUD_FUNCTION_URL = 'YOUR_CLOUD_FUNCTION_URL_HERE';
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent default form submission
+
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
+            formMessage.style.display = 'none';
+            formMessage.classList.remove('text-green-600', 'text-red-600');
+
+            const formData = new FormData(form);
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+                if (key === 'required_expertise') {
+                    if (!data[key]) {
+                        data[key] = [];
+                    }
+                    data[key].push(value);
+                } else {
+                    data[key] = value;
+                }
+            }
+
+            // Get current timestamp
+            data['submission_timestamp'] = new Date().toISOString();
+
+            try {
+                const response = await fetch(CLOUD_FUNCTION_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    formMessage.textContent = 'Idea submitted successfully! Thank you.';
+                    formMessage.classList.add('text-green-600');
+                    form.reset(); // Clear the form
+                } else {
+                    const errorData = await response.json();
+                    formMessage.textContent = `Submission failed: ${errorData.message || response.statusText}`;
+                    formMessage.classList.add('text-red-600');
+                }
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                formMessage.textContent = 'An error occurred. Please try again.';
+                formMessage.classList.add('text-red-600');
+            } finally {
+                formMessage.style.display = 'block';
+                submitButton.disabled = false;
+                submitButton.textContent = 'Submit Idea';
+            }
+        });
+</script>
 </body>
 </html>
