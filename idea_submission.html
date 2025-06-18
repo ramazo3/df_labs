@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Labs Idea Submission</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F3F4F6; /* Light gray background */
+        }
+        /* Brilliant Blues Palette */
+        /* Primary: #004AAD */
+        /* Accent 1: #007BFF */
+        /* Accent 2: #4DA3FF */
+        /* Accent 3: #80BFFF */
+        /* Dark Accent: #0062C7 */
+
+        .btn-primary {
+            background-color: #007BFF;
+            color: #FFFFFF;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .btn-primary:hover {
+            background-color: #0062C7;
+        }
+        .text-blue-main {
+            color: #004AAD;
+        }
+        .bg-blue-light {
+            background-color: #EBF2FF;
+        }
+        .border-blue-accent {
+            border-color: #4DA3FF;
+        }
+        .focus-ring-blue:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(77, 163, 255, 0.4); /* Tailwind's ring-blue-300 equivalent */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div class="max-w-3xl w-full bg-white rounded-lg shadow-xl p-6 md:p-10 my-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-blue-main mb-2">Deep Labs Idea Submission</h1>
+            <p class="text-gray-600 text-lg">Share your innovative AI-driven concepts for rapid prototyping.</p>
+        </header>
+
+        <form action="#" method="POST" class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="idea_title" class="block text-sm font-medium text-gray-700 mb-1">Idea Title <span class="text-red-500">*</span></label>
+                    <input type="text" id="idea_title" name="idea_title" required
+                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:border-blue-accent focus-ring-blue sm:text-base">
+                </div>
+                <div>
+                    <label for="proposer_name" class="block text-sm font-medium text-gray-700 mb-1">Your Name / Team Name <span class="text-red-500">*</span></label>
+                    <input type="text" id="proposer_name" name="proposer_name" required
+                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:border-blue-accent focus-ring-blue sm:text-base">
+                </div>
+            </div>
+
+            <div>
+                <label for="problem_statement" class="block text-sm font-medium text-gray-700 mb-1">Problem Statement <span class="text-red-500">*</span></label>
+                <textarea id="problem_statement" name="problem_statement" rows="4" required
+                          class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:border-blue-accent focus-ring-blue sm:text-base"
+                          placeholder="Clearly describe the problem this idea aims to solve."></textarea>
+                <p class="mt-2 text-sm text-gray-500">What specific challenge or need does this idea address for Deep Funding or the SNET ecosystem?</p>
+            </div>
+
+            <div>
+                <label for="proposed_solution" class="block text-sm font-medium text-gray-700 mb-1">Proposed AI-Driven Solution <span class="text-red-500">*</span></label>
+                <textarea id="proposed_solution" name="proposed_solution" rows="6" required
+                          class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:border-blue-accent focus-ring-blue sm:text-base"
+                          placeholder="Briefly describe your proposed solution. How does AI/ML play a role?"></textarea>
+                <p class="mt-2 text-sm text-gray-500">Outline the core functionality of your proposed prototype.</p>
+            </div>
+
+            <div>
+                <label for="target_audience" class="block text-sm font-medium text-gray-700 mb-1">Target Audience / Beneficiary <span class="text-red-500">*</span></label>
+                <input type="text" id="target_audience" name="target_audience" required
+                       class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:border-blue-accent focus-ring-blue sm:text-base"
+                       placeholder="e.g., Deep Funding voters, SNET developers, Deep Labs core team">
+                <p class="mt-2 text-sm text-gray-500">Who will primarily benefit from this solution?</p>
+            </div>
+
+            <div>
+                <label for="expected_impact" class="block text-sm font-medium text-gray-700 mb-1">Expected Impact / Benefits <span class="text-red-500">*</span></label>
+                <textarea id="expected_impact" name="expected_impact" rows="3" required
+                          class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:border-blue-accent focus-ring-blue sm:text-base"
+                          placeholder="Describe the positive outcomes or value this idea will create."></textarea>
+                <p class="mt-2 text-sm text-gray-500">How will this idea contribute to Deep Funding's goals or the SNET ecosystem?</p>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Required Deep Labs Expertise <span class="text-red-500">*</span></label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 bg-blue-light p-4 rounded-md">
+                    <div class="flex items-center">
+                        <input id="req_developer" name="required_expertise" type="checkbox" value="Developer"
+                               class="h-4 w-4 text-[#007BFF] border-gray-300 rounded focus:ring-[#007BFF]">
+                        <label for="req_developer" class="ml-2 block text-sm text-gray-900">Developer</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="req_data_analyst" name="required_expertise" type="checkbox" value="Data Analyst/Engineer"
+                               class="h-4 w-4 text-[#007BFF] border-gray-300 rounded focus:ring-[#007BFF]">
+                        <label for="req_data_analyst" class="ml-2 block text-sm text-gray-900">Data Analyst/Engineer</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="req_ml_ai" name="required_expertise" type="checkbox" value="ML/AI Specialist"
+                               class="h-4 w-4 text-[#007BFF] border-gray-300 rounded focus:ring-[#007BFF]">
+                        <label for="req_ml_ai" class="ml-2 block text-sm text-gray-900">ML/AI Specialist</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="req_pm" name="required_expertise" type="checkbox" value="Product Manager"
+                               class="h-4 w-4 text-[#007BFF] border-gray-300 rounded focus:ring-[#007BFF]">
+                        <label for="req_pm" class="ml-2 block text-sm text-gray-900">Product Manager</label>
+                    </div>
+                     <div class="flex items-center">
+                        <input id="req_qa" name="required_expertise" type="checkbox" value="QA Specialist"
+                               class="h-4 w-4 text-[#007BFF] border-gray-300 rounded focus:ring-[#007BFF]">
+                        <label for="req_qa" class="ml-2 block text-sm text-gray-900">QA Specialist</label>
+                    </div>
+                </div>
+                <p class="mt-2 text-sm text-gray-500">Select the primary roles required for your idea's prototyping.</p>
+            </div>
+
+            <div>
+                <label for="success_metrics" class="block text-sm font-medium text-gray-700 mb-1">Potential MVP Success Metrics</label>
+                <textarea id="success_metrics" name="success_metrics" rows="3"
+                          class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:border-blue-accent focus-ring-blue sm:text-base"
+                          placeholder="e.g., 'X% reduction in manual review time', 'Achieve Y accuracy rate'"></textarea>
+                <p class="mt-2 text-sm text-gray-500">How would you measure if your prototype is successful?</p>
+            </div>
+
+            <div>
+                <label for="dependencies" class="block text-sm font-medium text-gray-700 mb-1">Dependencies / Prerequisites</label>
+                <textarea id="dependencies" name="dependencies" rows="3"
+                          class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:border-blue-accent focus-ring-blue sm:text-base"
+                          placeholder="e.g., 'Requires access to Deep Funding grant data', 'Needs a specific SNET service'"></textarea>
+                <p class="mt-2 text-sm text-gray-500">Are there any external data, tools, or other prerequisites for this idea?</p>
+            </div>
+
+            <div class="flex justify-end pt-4">
+                <button type="submit" class="btn-primary">
+                    Submit Idea
+                </button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
