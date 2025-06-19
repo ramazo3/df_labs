@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Labs Ideas Overview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F3F4F6; /* Light gray background */
+        }
+        /* Brilliant Blues Palette */
+        /* Primary: #004AAD */
+        /* Accent 1: #007BFF */
+        /* Accent 2: #4DA3FF */
+        /* Accent 3: #80BFFF */
+        /* Dark Accent: #0062C7 */
+
+        .text-blue-main {
+            color: #004AAD;
+        }
+        .bg-blue-accent {
+            background-color: #007BFF;
+        }
+        .text-blue-accent {
+            color: #007BFF;
+        }
+        .border-blue-soft {
+            border-color: #80BFFF;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <header class="bg-white shadow-md py-4 mb-8">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-blue-main">Deep Labs Idea Pipeline</h1>
+            <p class="text-gray-600 text-lg mt-2">A Real-Time Overview of Submitted Innovation Concepts</p>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 pb-8">
+        <div id="statusMessage" class="text-center p-4 rounded-lg text-gray-700 bg-gray-100 my-4">
+            Loading ideas...
+        </div>
+
+        <div id="ideasContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Idea cards will be injected here by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, collection, onSnapshot, query, orderBy, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        // Global variables provided by the Canvas environment
+        const firebaseConfig = {
+          apiKey: "AIzaSyCBnJ7AOWggzZeVE-i4zZCq7R3sOvnhEVM",
+          authDomain: "labs-463322.firebaseapp.com",
+          projectId: "labs-463322",
+          storageBucket: "labs-463322.firebasestorage.app",
+          messagingSenderId: "137748040614",
+          appId: "1:137748040614:web:ebdcda878fe2b891109d67",
+          measurementId: "G-5SX4H8PD2T"
+        };
+
+        let app;
+        let db;
+        
+        const statusMessageDiv = document.getElementById('statusMessage');
+        const ideasContainer = document.getElementById('ideasContainer');
+
+        // Function to display messages to the user
+        function displayMessage(message, type = 'info') {
+            statusMessageDiv.textContent = message;
+            statusMessageDiv.className = `text-center p-4 rounded-lg my-4 font-semibold `;
+            if (type === 'error') {
+                statusMessageDiv.classList.add('bg-red-100', 'text-red-700');
+            } else if (type === 'success') {
+                statusMessageDiv.classList.add('bg-green-100', 'text-green-700');
+            } else {
+                statusMessageDiv.classList.add('bg-gray-100', 'text-gray-700');
+            }
+        }
+
+        // Function to format Firestore Timestamp or Date objects
+        function formatFirestoreTimestamp(timestamp) {
+            if (timestamp instanceof Timestamp) {
+                return timestamp.toDate().toLocaleString(); // Convert Timestamp to Date, then format
+            } else if (timestamp instanceof Date) {
+                return timestamp.toLocaleString();
+            } else if (typeof timestamp === 'string') {
+                 try {
+                    const date = new Date(timestamp);
+                    if (!isNaN(date)) {
+                        return date.toLocaleString();
+                    }
+                 } catch (e) {
+                    // Fallback to original string if not a valid date string
+                 }
+            }
+            return timestamp; // Return as is if not a recognized date type
+        }
+
+        // Initialize Firebase and set up authentication listener
+        async function initializeFirebase() {
+            try {
+                if (Object.keys(firebaseConfig).length === 0) {
+                    displayMessage('Firebase configuration not provided. Cannot connect to database.', 'error');
+                    console.error("Error: __firebase_config is empty or invalid.");
+                    return;
+                }
+
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                
+              
+            } catch (error) {
+                console.error("Error initializing Firebase:", error);
+                displayMessage(`Failed to initialize Firebase: ${error.message}. Please check console.`, 'error');
+            }
+        }
+
+        // Setup Firestore real-time listener
+        function setupRealtimeListener() {
+            if (!db) {
+                displayMessage("Firestore is not initialized. Cannot set up listener.", 'error');
+                return;
+            }
+
+            // Reference to the 'dfLabsIdeas' collection
+            const ideasCollectionRef = collection(db, 'dfLabsIdeas');
+
+            // Create a query to order ideas by server_timestamp (newest first)
+            // Note: Firebase `orderBy` requires an index if you order by a field
+            // that is not also used in a `where` clause. If you encounter
+            // "The query requires an index" errors, you'll need to create
+            // a composite index in the Firestore console.
+            const q = query(ideasCollectionRef, orderBy('server_timestamp', 'desc'));
+
+            // Set up real-time listener
+            onSnapshot(q, (snapshot) => {
+                ideasContainer.innerHTML = ''; // Clear previous ideas
+                if (snapshot.empty) {
+                    displayMessage('No ideas submitted yet. Be the first to share one!');
+                    return;
+                }
+
+                let ideaCount = 0;
+                snapshot.forEach(doc => {
+                    ideaCount++;
+                    const idea = doc.data();
+                    const ideaId = doc.id;
+
+                    const expertiseTags = Array.isArray(idea.required_expertise)
+                        ? idea.required_expertise.map(exp => `<span class="inline-block bg-blue-100 text-blue-main text-xs font-semibold px-2.5 py-0.5 rounded-full mr-2 mb-2">${exp}</span>`).join('')
+                        : '';
+
+                    const cardHtml = `
+                        <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-blue-soft">
+                            <div class="p-6">
+                                <h2 class="text-xl font-bold text-blue-main mb-2">${idea.idea_title || 'No Title'}</h2>
+                                <p class="text-sm text-gray-500 mb-4">Submitted by: <span class="font-semibold text-gray-700">${idea.proposer_name || 'Anonymous'}</span> on ${formatFirestoreTimestamp(idea.server_timestamp || idea.submission_timestamp)}</p>
+
+                                <div class="mb-4">
+                                    <h3 class="font-semibold text-gray-700">Problem:</h3>
+                                    <p class="text-gray-600 text-sm">${idea.problem_statement || 'N/A'}</p>
+                                </div>
+                                <div class="mb-4">
+                                    <h3 class="font-semibold text-gray-700">Solution:</h3>
+                                    <p class="text-gray-600 text-sm">${idea.proposed_solution || 'N/A'}</p>
+                                </div>
+                                <div class="mb-4">
+                                    <h3 class="font-semibold text-gray-700">Target Audience:</h3>
+                                    <p class="text-gray-600 text-sm">${idea.target_audience || 'N/A'}</p>
+                                </div>
+                                <div class="mb-4">
+                                    <h3 class="font-semibold text-gray-700">Expected Impact:</h3>
+                                    <p class="text-gray-600 text-sm">${idea.expected_impact || 'N/A'}</p>
+                                </div>
+                                <div class="mb-4">
+                                    <h3 class="font-semibold text-gray-700">Required Expertise:</h3>
+                                    <div class="flex flex-wrap mt-1">
+                                        ${expertiseTags || '<span class="text-gray-500 text-sm">Not specified</span>'}
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <h3 class="font-semibold text-gray-700">MVP Success Metrics:</h3>
+                                    <p class="text-gray-600 text-sm">${idea.success_metrics || 'N/A'}</p>
+                                </div>
+                                <div class="mb-4">
+                                    <h3 class="font-semibold text-gray-700">Dependencies:</h3>
+                                    <p class="text-gray-600 text-sm">${idea.dependencies || 'N/A'}</p>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 px-6 py-3 border-t border-gray-200">
+                                <p class="text-xs text-gray-400">Idea ID: ${ideaId}</p>
+                            </div>
+                        </div>
+                    `;
+                    ideasContainer.insertAdjacentHTML('beforeend', cardHtml);
+                });
+                displayMessage(`${ideaCount} ideas currently in the pipeline.`, 'success');
+            }, (error) => {
+                console.error("Error fetching ideas:", error);
+                displayMessage(`Error loading ideas: ${error.message}. Please check your connection or permissions.`, 'error');
+            });
+        }
+
+        // Start Firebase initialization when the script loads
+        initializeFirebase().then(setupRealtimeListener);
+
+    </script>
+</body>
+</html>
