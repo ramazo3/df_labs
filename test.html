@@ -5,61 +5,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Deep Labs Ideas Overview</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet"/>
   <style>
-    body { font-family: 'Inter', sans-serif; background-color: #F3F4F6; }
+    body { font-family: 'Inter', sans-serif; background: #F3F4F6; }
     .text-blue-main { color: #004AAD; }
     .bg-blue-accent { background-color: #007BFF; }
     .border-blue-soft { border-color: #80BFFF; }
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
-  <header class="bg-white shadow-md py-4 mb-8">
+
+  <header class="bg-white shadow py-4 mb-8">
     <div class="container mx-auto px-4 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-blue-main">
-        Deep Labs Idea Pipeline
-      </h1>
+      <h1 class="text-3xl md:text-4xl font-bold text-blue-main">Deep Labs Idea Pipeline</h1>
     </div>
   </header>
 
   <main class="flex-grow container mx-auto px-4 pb-8">
-    <div id="statusMessage" class="text-center p-4 rounded-lg bg-gray-100 my-4">
+    <div id="statusMessage" class="text-center p-4 rounded-lg bg-gray-100 my-4 font-semibold">
       Loading ideas...
     </div>
 
-    <!-- Date Range Picker + Clear Button -->
-    <div class="mb-6 flex items-center justify-center space-x-4">
+    <!-- Date Range Picker + Clear button -->
+    <div class="mb-6 flex justify-center space-x-4">
       <div class="relative max-w-sm">
         <input datepicker id="startDate" datepicker-format="yyyy-mm-dd"
-               class="bg-white border border-gray-300 rounded px-3 py-2 block w-full"
-               placeholder="Start date">
+          class="bg-white border border-gray-300 rounded px-3 py-2 w-full"
+          placeholder="Start date">
       </div>
       <div class="relative max-w-sm">
         <input datepicker id="endDate" datepicker-format="yyyy-mm-dd"
-               class="bg-white border border-gray-300 rounded px-3 py-2 block w-full"
-               placeholder="End date">
+          class="bg-white border border-gray-300 rounded px-3 py-2 w-full"
+          placeholder="End date">
       </div>
-      <button id="clearBtn"
-              class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded font-semibold">
+      <button id="clearBtn" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded">
         Clear Filters
       </button>
     </div>
 
     <div id="ideasContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Idea cards here -->
+      <!-- Ideas injected here -->
     </div>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.bundle.js"></script>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore, collection, onSnapshot, query, orderBy, Timestamp } from 
-      "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getFirestore, collection, onSnapshot, query, orderBy, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    const firebaseConfig = { /* your config here */ };
+    const firebaseConfig = {
+      apiKey: "AIzaSyCBnJ...", authDomain: "labs-463322.firebaseapp.com",
+      projectId: "labs-463322", storageBucket: "labs-463322.appspot.com",
+      messagingSenderId: "137748040614", appId: "1:137748040614:web:ebdcda878fe2b891109d67"
+    };
 
-    let allIdeas = [];
-    let db;
+    let db, allIdeas = [];
     const statusMessage = document.getElementById('statusMessage');
     const ideasContainer = document.getElementById('ideasContainer');
     const startDateInput = document.getElementById('startDate');
@@ -68,32 +68,43 @@
 
     function displayMsg(msg, type='info') {
       statusMessage.textContent = msg;
-      statusMessage.className = `text-center p-4 rounded-lg bg-gray-100 my-4 font-semibold `;
+      statusMessage.className = `text-center p-4 rounded-lg my-4 font-semibold `;
       statusMessage.classList.add(
-        type === 'error' ? 'bg-red-100 text-red-700' :
-        type === 'success' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'
+        type==='error'?'bg-red-100 text-red-700':
+        type==='success'?'bg-green-100 text-green-700':'bg-gray-100 text-gray-700'
       );
     }
 
     function renderIdeas(list) {
       ideasContainer.innerHTML = '';
       if (list.length === 0) {
-        displayMsg('No ideas found for this range.', 'info'); return;
+        displayMsg('No ideas found for this range.', 'info');
+        return;
       }
-      list.slice(0, 3).forEach(idea => {
-        const tags = (idea.required_expertise || []).map(exp =>
+      list.slice(0,3).forEach(idea => {
+        const tags = (idea.required_expertise||[]).map(exp =>
           `<span class="inline-block bg-blue-100 text-blue-main text-xs px-2 py-0.5 rounded mr-1 mb-1">${exp}</span>`
         ).join('');
         ideasContainer.insertAdjacentHTML('beforeend', `
-          <div class="bg-white rounded-lg shadow-md p-6 border border-blue-soft">
+          <div class="bg-white rounded-lg shadow-md p-6 border border-blue-soft idea-card">
             <h2 class="text-xl font-bold text-blue-main mb-2">${idea.idea_title}</h2>
-            <p class="text-sm text-gray-500 mb-4">
-              ${idea.proposer_name} • ${idea.server_timestamp.toLocaleString()}
-            </p>
-            <div>${tags}</div>
-          </div>
-        `);
+            <p class="text-sm text-gray-500 mb-4">${idea.proposer_name} • ${idea.server_timestamp.toLocaleString()}</p>
+            <div class="mb-3"><h3 class="font-semibold text-gray-700">Problem:</h3><p class="text-gray-600 text-sm">${idea.problem_statement||'N/A'}</p></div>
+            <div class="mb-3"><h3 class="font-semibold text-gray-700">Solution:</h3><p class="text-gray-600 text-sm">${idea.proposed_solution||'N/A'}</p></div>
+            <div class="mb-3">${tags}</div>
+          </div>`);
       });
+      if (list.length > 3) {
+        const btn = document.createElement('button');
+        btn.textContent = 'Load More Ideas';
+        btn.className = 'mt-6 mx-auto block px-6 py-3 text-white bg-blue-accent hover:bg-blue-700 rounded';
+        btn.onclick = () => {
+          ideasContainer.innerHTML = '';
+          list.forEach(idea => ideasContainer.insertAdjacentHTML('beforeend', document.querySelector('.idea-card').outerHTML));
+          btn.remove();
+        };
+        ideasContainer.insertAdjacentElement('afterend', btn);
+      }
       displayMsg(`${list.length} ideas found`, 'success');
     }
 
@@ -104,8 +115,8 @@
         displayMsg('End date cannot be before start date.', 'error');
         return;
       }
-      let filtered = allIdeas.filter(idea => {
-        const d = idea.server_timestamp;
+      const filtered = allIdeas.filter(i => {
+        const d = i.server_timestamp;
         if (s && d < s) return false;
         if (e && d > e) return false;
         return true;
@@ -114,29 +125,31 @@
     }
 
     clearBtn.onclick = () => {
-      startDateInput.value = endDateInput.value = '';
+      startDateInput.value = '';
+      endDateInput.value = '';
       displayMsg('Filters cleared.', 'info');
       renderIdeas(allIdeas);
     };
 
+    document.addEventListener('DOMContentLoaded', () => {
+      new Datepicker(startDateInput, { autohide: true });
+      new Datepicker(endDateInput, { autohide: true });
+    }); // Ensure datepicker popup works :contentReference[oaicite:5]{index=5}
+
     async function initFirebase() {
       const app = initializeApp(firebaseConfig);
       db = getFirestore(app);
-      const q = query(collection(db, 'dfLabsIdeas'), orderBy('server_timestamp','desc'));
-      onSnapshot(q, snap => {
-        allIdeas = snap.docs.map(doc => {
-          const d = doc.data();
-          return {
-            ...d,
-            idea_title: d.idea_title || 'No Title',
-            proposer_name: d.proposer_name || 'Anonymous',
-            required_expertise: d.required_expertise || [],
-            server_timestamp: d.server_timestamp instanceof Timestamp ?
-                              d.server_timestamp.toDate() : new Date(d.server_timestamp)
-          };
-        });
-        applyFilter();
-      }, err => displayMsg(err.message, 'error'));
+      onSnapshot(query(collection(db, 'dfLabsIdeas'), orderBy('server_timestamp','desc')),
+        snap => {
+          allIdeas = snap.docs.map(doc => {
+            const d = doc.data();
+            const t = d.server_timestamp instanceof Timestamp ? d.server_timestamp.toDate() : new Date(d.server_timestamp);
+            return { ...d, server_timestamp: t };
+          });
+          applyFilter();
+        },
+        err => displayMsg(err.message, 'error')
+      );
     }
 
     initFirebase();
