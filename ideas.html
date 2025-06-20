@@ -52,14 +52,6 @@
     </main>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getFirestore, collection, onSnapshot, query, orderBy, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-        async function loadFirebaseConfig() {
-            const res = await fetch('firebase-config.json');
-            return res.json();
-        }
-
         let allIdeas = [];
         let filteredIdeas = null;
         let showingAll = false;
@@ -108,7 +100,7 @@
                         <div class="mb-4"><h3 class="font-semibold text-gray-700">Solution:</h3><p class="text-gray-600 text-sm">${idea.proposed_solution || 'N/A'}</p></div>
                         <div class="mb-4"><h3 class="font-semibold text-gray-700">Target Audience:</h3><p class="text-gray-600 text-sm">${idea.target_audience || 'N/A'}</p></div>
                         <div class="mb-4"><h3 class="font-semibold text-gray-700">Expected Impact:</h3><p class="text-gray-600 text-sm">${idea.expected_impact || 'N/A'}</p></div>
-                        <div class="mb-4"><h3 class="font-semibold text-gray-700">Required Expertise:</h3><div class="flex flex-wrap mt-1">${Array.isArray(idea.required_expertise) ? idea.required_expertise.map(e => `<span class=\"inline-block bg-blue-100 text-blue-main text-xs font-semibold px-2.5 py-0.5 rounded-full mr-2 mb-2\">${e}</span>`).join('') : '<span class="text-gray-500 text-sm">Not specified</span>'}</div></div>
+                        <div class="mb-4"><h3 class="font-semibold text-gray-700">Required Expertise:</h3><div class="flex flex-wrap mt-1">${Array.isArray(idea.required_expertise) ? idea.required_expertise.map(e => `<span class="inline-block bg-blue-100 text-blue-main text-xs font-semibold px-2.5 py-0.5 rounded-full mr-2 mb-2">${e}</span>`).join('') : '<span class="text-gray-500 text-sm">Not specified</span>'}</div></div>
                         <div class="mb-4"><h3 class="font-semibold text-gray-700">MVP Success Metrics:</h3><p class="text-gray-600 text-sm">${idea.success_metrics || 'N/A'}</p></div>
                         <div class="mb-4"><h3 class="font-semibold text-gray-700">Dependencies:</h3><p class="text-gray-600 text-sm">${idea.dependencies || 'N/A'}</p></div>
                     </div>`;
@@ -150,17 +142,21 @@
             renderIdeas(filteredIdeas || allIdeas);
         });
 
-        
-        // Firebase init & listener
-        loadFirebaseConfig().then(config => {
-            const app = initializeApp(config);
-            const db = getFirestore(app);
-            const ideasQuery = query(collection(db, 'dfLabsIdeas'), orderBy('server_timestamp', 'desc'));
-            onSnapshot(ideasQuery, snap => {
-                allIdeas = snap.docs.map(d => d.data());
-                clearFilter();
-            }, err => displayMessage(`Error loading ideas: ${err.message}`, 'error'));
-        });
+        // Fetch ideas from Cloud Function
+    async function fetchIdeas() {
+        try {
+            const res = await fetch("https://us-central1-labs-463322.cloudfunctions.net/getIdeas");
+            const data = await res.json();
+            if (!Array.isArray(data)) throw new Error("Invalid response format");
+            allIdeas = data;
+            clearFilter();
+        } catch (err) {
+            displayMessage("Error fetching ideas: " + err.message, 'error');
+        }
+    }
+
+    // Load on page start
+    fetchIdeas();
     </script>
 </body>
 </html>
