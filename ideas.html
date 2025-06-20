@@ -159,7 +159,7 @@
             onSnapshot(ideasQuery, snap => {
                 allIdeas = snnap.decs.map(d => d.data());
                 clearFilter();
-            }, err => displayMessage(`Error loading ideas: ${err.message}`, 'error');
+            }, err => displayMessage(`Error loading ideas: ${err.message}`, 'error'));
         });
     </script>
 </body>
