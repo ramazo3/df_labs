@@ -55,15 +55,10 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getFirestore, collection, onSnapshot, query, orderBy, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-        const firebaseConfig = {
-          apiKey: "AIzaSyCBnJ7AOWggzZeVE-i4zZCq7R3sOvnhEVM",
-          authDomain: "labs-463322.firebaseapp.com",
-          projectId: "labs-463322",
-          storageBucket: "labs-463322.firebasestorage.app",
-          messagingSenderId: "137748040614",
-          appId: "1:137748040614:web:ebdcda878fe2b891109d67",
-          measurementId: "G-5SX4H8PD2T"
-        };
+        async function loadFirebaseConfig() {
+            const res = await fetch('firebase-config.json');
+            return res.json();
+        }
 
         let allIdeas = [];
         let filteredIdeas = null;
@@ -155,14 +150,17 @@
             renderIdeas(filteredIdeas || allIdeas);
         });
 
+        
         // Firebase init & listener
-        initializeApp(firebaseConfig);
-        const db = getFirestore();
-        const ideasQuery = query(collection(db, 'dfLabsIdeas'), orderBy('server_timestamp', 'desc'));
-        onSnapshot(ideasQuery, snap => {
-            allIdeas = snap.docs.map(d => d.data());
-            clearFilter();
-        }, err => displayMessage(`Error loading ideas: ${err.message}`, 'error'));
+        loadFirebaseConfig().then(config => {
+            const app = initializeApp(config);
+            const db = getFirestore(app);
+            const ideasQuery = query(collection(db, 'dfLabsIdeas'), orderBy('server_timestamp', 'desc'));
+            onSnapshot(ideasQuery, snap => {
+                allIdeas = snnap.decs.map(d => d.data());
+                clearFilter();
+            }, err => displayMessage(`Error loading ideas: ${err.message}`, 'error');
+        });
     </script>
 </body>
 </html>
