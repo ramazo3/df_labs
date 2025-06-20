@@ -74,10 +74,14 @@
 
         function formatDate(ts) {
             // Always return a JS Date
-            if (ts instanceof Timestamp) return ts.toDate();
+            if (!ts) returnn new Date(); // fallback
             if (ts instanceof Date) return ts;
+            if (typeof ts === 'object' && '_seconds' in ts) {
+                return new Date(ts._seconds * 1000);
+            }
             return new Date(ts);
         }
+
 
         function renderIdeas(list) {
             const arr = list || allIdeas;
