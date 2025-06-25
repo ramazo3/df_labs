@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Labs Logo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f2f5; /* Light grey background for contrast */
+            padding: 20px;
+        }
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+        .logo-svg-wrapper {
+            width: 180px; /* Adjusted size for better visibility */
+            height: 180px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .logo-wordmark {
+            font-size: 2.5rem; /* Larger font size for prominence */
+            font-weight: 700;
+            color: #333;
+            text-align: center;
+            letter-spacing: -0.05em; /* Tighter letter spacing */
+        }
+        .logo-tagline {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #666;
+            margin-top: 5px;
+            text-align: center;
+        }
+
+        /* SVG specific styles */
+        .lab-c-shape-1 {
+            fill: url(#gradientPrimaryAccent); /* Use a gradient for dynamic flow */
+        }
+        .lab-c-shape-2 {
+            fill: url(#gradientAccentLighter); /* Use a gradient for dynamic flow */
+            transform: rotate(180deg); /* Rotate for interlocking effect */
+            transform-origin: center;
+        }
+        .spark-path {
+            fill: url(#gradientSpark); /* Gradient for the spark */
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2)); /* Subtle shadow for depth */
+        }
+        .node-circle {
+            fill: #4DA3FF; /* Accent Blue 2 for nodes */
+            opacity: 0.8;
+        }
+        .node-line {
+            stroke: #80BFFF; /* Accent Blue 3 for lines */
+            stroke-width: 1.5;
+            opacity: 0.6;
+        }
+
+        /* Animation for dynamic elements */
+        @keyframes flow {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+
+        .dynamic-flow-line {
+            stroke: #80BFFF;
+            stroke-width: 2;
+            stroke-dasharray: 10 5;
+            animation: flow 2s infinite ease-in-out;
+        }
+
+        @keyframes sparkPulse {
+            0% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.9; }
+        }
+        .spark-path {
+            animation: sparkPulse 3s infinite ease-in-out;
+        }
+
+        @media (max-width: 600px) {
+            .logo-container {
+                padding: 25px;
+            }
+            .logo-svg-wrapper {
+                width: 150px;
+                height: 150px;
+            }
+            .logo-wordmark {
+                font-size: 2rem;
+            }
+            .logo-tagline {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <div class="logo-svg-wrapper">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <!-- Gradients for Core Shapes -->
+                    <linearGradient id="gradientPrimaryAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#004AAD" />
+                        <stop offset="100%" stop-color="#007BFF" />
+                    </linearGradient>
+                    <linearGradient id="gradientAccentLighter" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#007BFF" />
+                        <stop offset="100%" stop-color="#4DA3FF" />
+                    </linearGradient>
+                    <!-- Gradient for Spark -->
+                    <linearGradient id="gradientSpark" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#4DA3FF" />
+                        <stop offset="100%" stop-color="#80BFFF" />
+                    </linearGradient>
+                </defs>
+
+                <!-- Core Shape (Implied Sphere/Hub) -->
+                <!-- First 'C' shape (Primary Blue) -->
+                <path class="lab-c-shape-1" d="M 100 20 A 80 80 0 0 1 180 100 A 80 80 0 0 1 100 180 L 100 150 A 50 50 0 0 0 150 100 A 50 50 0 0 0 100 50 Z" transform="translate(-10, -10)"/>
+
+                <!-- Second 'C' shape (Accent Blue), slightly offset and interlocked -->
+                <path class="lab-c-shape-2" d="M 100 20 A 80 80 0 0 1 180 100 A 80 80 0 0 1 100 180 L 100 150 A 50 50 0 0 0 150 100 A 50 50 0 0 0 100 50 Z" transform="translate(10, 10) rotate(180 100 100)"/>
+
+                <!-- AI/Innovation Element (Option A: Neural Network - modified for abstract flow) -->
+                <!-- Dynamic lines hinting at data flow -->
+                <path class="dynamic-flow-line" d="M 100 80 Q 120 70 130 90 T 150 110" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                <path class="dynamic-flow-line" d="M 100 120 Q 80 130 70 110 T 50 90" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+
+                <!-- AI/Innovation Element (Option B: Growth/Spark) -->
+                <!-- A sharp, upward-pointing abstract 'spark' -->
+                <path class="spark-path" d="M 95 65 L 105 65 L 115 50 L 100 30 L 85 50 Z" transform="translate(0, -15)"/>
+
+                <!-- Subtle data nodes (small, rounded dots) -->
+                <circle class="node-circle" cx="80" cy="110" r="3.5" />
+                <circle class="node-circle" cx="120" cy="90" r="3.5" />
+                <circle class="node-circle" cx="100" cy="70" r="3.5" />
+                <circle class="node-circle" cx="135" cy="120" r="3.5" />
+                <circle class="node-circle" cx="65" cy="80" r="3.5" />
+
+                <!-- Connecting lines for nodes -->
+                <line class="node-line" x1="80" y1="110" x2="100" y2="70" />
+                <line class="node-line" x1="120" y1="90" x2="100" y2="70" />
+                <line class="node-line" x1="80" y1="110" x2="65" y2="80" />
+                <line class="node-line" x1="120" y1="90" x2="135" y2="120" />
+
+            </svg>
+        </div>
+        <div class="logo-wordmark">Deep Labs</div>
+        <div class="logo-tagline">Converging Innovation</div>
+    </div>
+</body>
+</html>
