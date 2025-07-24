@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Labs: Idea to Impact Pipeline</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F3F4F6; /* Light gray background */
+        }
+        /* Brilliant Blues Palette */
+        /* Primary: #004AAD */
+        /* Accent 1: #007BFF */
+        /* Accent 2: #4DA3FF */
+        /* Accent 3: #80BFFF */
+        /* Dark Accent: #0062C7 */
+
+        .text-blue-main { color: #004AAD; }
+        .bg-blue-accent { background-color: #007BFF; }
+        .text-blue-accent { color: #007BFF; }
+        .border-blue-soft { border-color: #80BFFF; }
+        .bg-blue-light { background-color: #EBF2FF; }
+
+        /* Custom styles for flow arrows and elements */
+        .flow-arrow {
+            font-size: 2.5rem; /* Larger arrow */
+            color: #007BFF;
+            margin: 0 1rem;
+            transform: rotate(90deg); /* Default for mobile/vertical */
+        }
+        @media (min-width: 768px) {
+            .flow-arrow {
+                transform: rotate(0deg); /* Horizontal for desktop */
+            }
+        }
+        .flow-box {
+            @apply flex flex-col items-center justify-center p-4 rounded-lg shadow-md text-center border border-blue-soft bg-white;
+        }
+        .flow-box-sm {
+            @apply flex flex-col items-center justify-center p-2 rounded-lg shadow-sm text-center border border-blue-soft bg-white text-sm;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <header class="bg-white shadow-md py-4 mb-8">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-blue-main">Deep Labs: Idea to Impact Pipeline</h1>
+            <p class="text-gray-600 text-lg mt-2">Transforming Concepts into AI-Driven Solutions</p>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 pb-8 space-y-12">
+
+        <section id="introduction" class="bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-3xl font-bold text-center text-blue-accent mb-4">Welcome to the Deep Labs Journey!</h2>
+            <p class="max-w-3xl mx-auto text-gray-700 text-center">
+                Deep Labs is where innovation takes flight. This infographic walks you through our streamlined process, from the initial spark of an idea to the deployment of impactful AI prototypes. We're currently thriving with 6 active pods, each making significant progress towards early wins. It all begins with an idea – let's explore how it evolves!
+            </p>
+        </section>
+
+        <section id="idea-submission" class="bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold text-blue-main mb-4 text-center">1. The Spark of Innovation: Idea Submission</h2>
+            <p class="text-gray-700 mb-6 text-center max-w-2xl mx-auto">
+                Every great solution starts with a compelling idea. Our continuous idea intake process ensures that valuable insights from the community and internal teams are captured and considered.
+            </p>
+            <div class="flex flex-col items-center justify-center py-4">
+                <div class="flow-box bg-blue-light">
+                    <span class="text-5xl mb-2">💡</span>
+                    <h3 class="font-semibold text-xl text-blue-main">Got an Idea?</h3>
+                    <p class="text-gray-600 text-sm mt-1">Submit your AI-driven concept here:</p>
+                    <a href="https://ramazo3.github.io/df_labs/submit-idea" target="_blank" class="mt-3 inline-block bg-blue-accent text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-main transition-colors">Submit Your Idea</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="team-signup" class="bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold text-blue-main mb-4 text-center">2. Building the Team: Technical Talent Signups</h2>
+            <p class="text-gray-700 mb-6 text-center max-w-2xl mx-auto">
+                Deep Labs thrives on diverse expertise. If you're a developer, data analyst/engineer, or ML/AI specialist looking to contribute to rapid prototyping, we invite you to join our growing team.
+            </p>
+            <div class="flex flex-col items-center justify-center py-4">
+                <div class="flow-box bg-blue-light">
+                    <span class="text-5xl mb-2">🤝</span>
+                    <h3 class="font-semibold text-xl text-blue-main">Join Our Technical Team!</h3>
+                    <p class="text-gray-600 text-sm mt-1">Sign up to become a Deep Labs member:</p>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdUJnEPRzkyb0OJJBYVzBWCvc5TknsNmtLZvf4dwVTmnadIqA/viewform" target="_blank" class="mt-3 inline-block bg-blue-accent text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-main transition-colors">Sign Up Here</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="prioritization-pod-creation" class="bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold text-blue-main mb-4 text-center">3. Prioritization & Pod Creation</h2>
+            <p class="text-gray-700 mb-6 text-center max-w-2xl mx-auto">
+                Once submitted, ideas undergo a rigorous review to ensure alignment with Deep Funding's strategic goals and feasibility for rapid prototyping. This process leads directly to the formation of dedicated pods.
+            </p>
+            <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
+                <div class="flow-box">
+                    <span class="text-4xl text-blue-accent">📥</span>
+                    <p class="font-semibold mt-2">Submitted Ideas</p>
+                    <a href="https://ramazo3.github.io/df_labs/ideas" target="_blank" class="text-xs text-blue-accent hover:underline mt-1">View All Ideas</a>
+                </div>
+                <span class="flow-arrow">➔</span>
+                <div class="flow-box">
+                    <span class="text-4xl text-blue-accent">👥</span>
+                    <p class="font-semibold mt-2">Cluster Review & Prioritization</p>
+                    <p class="text-gray-600 text-xs mt-1">(Problem Statement Confirmation)</p>
+                </div>
+                <span class="flow-arrow">➔</span>
+                <div class="flow-box">
+                    <span class="text-4xl text-blue-accent">🚀</span>
+                    <p class="font-semibold mt-2">Idea Passed to Labs</p>
+                </div>
+                <span class="flow-arrow">➔</span>
+                <div class="flow-box">
+                    <span class="text-4xl text-blue-accent">🏗️</span>
+                    <p class="font-semibold mt-2">Pod Creation</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="deep-labs-in-action" class="bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold text-blue-main mb-4 text-center">4. Deep Labs in Action: Prototyping & Collaboration</h2>
+            <p class="text-gray-700 mb-6 text-center max-w-2xl mx-auto">
+                With ideas selected and pods formed, the rapid prototyping begins! Our current 6 pods are actively developing innovative solutions, fostering a culture of continuous progress and shared learning.
+            </p>
+
+            <h3 class="text-xl font-semibold text-blue-accent mb-4 text-center">Our Active Pods:</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                <div class="bg-blue-light p-4 rounded-lg text-center font-medium text-blue-main">AI Avatar</div>
+                <div class="bg-blue-light p-4 rounded-lg text-center font-medium text-blue-main">AI Review Assistants</div>
+                <div class="bg-blue-light p-4 rounded-lg text-center font-medium text-blue-main">Voting Methods Experiment</div>
+                <div class="bg-blue-light p-4 rounded-lg text-center font-medium text-blue-main">AI-based Idea-filtering</div>
+                <div class="bg-blue-light p-4 rounded-lg text-center font-medium text-blue-main">Impact Measure</div>
+                <div class="bg-blue-light p-4 rounded-lg text-center font-medium text-blue-main">HiveMind/MM Integration</div>
+            </div>
+            <p class="text-center text-gray-600 mb-8">All pods are progressing well, and we look forward to quite a few early wins!</p>
+
+            <h3 class="text-xl font-semibold text-blue-accent mb-4 text-center">The Prototyping Workflow:</h3>
+            <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
+                <div class="flow-box">
+                    <span class="text-4xl text-blue-accent">🤝</span>
+                    <p class="font-semibold mt-2">Discovery & Alignment Meeting</p>
+                    <p class="text-gray-600 text-xs mt-1">(Define MVP/Prototype, Assign Tasks)</p>
+                </div>
+                <span class="flow-arrow">➔</span>
+                <div class="flow-box">
+                    <span class="text-4xl text-blue-accent">🛠️</span>
+                    <p class="font-semibold mt-2">Pod Work Commences</p>
+                    <a href="https://ramazo3.github.io/df_labs/" target="_blank" class="text-xs text-blue-accent hover:underline mt-1">Current Workflow Overview</a>
+                </div>
+                <span class="flow-arrow">➔</span>
+                <div class="flex flex-col items-center justify-center space-y-2">
+                    <div class="flow-box-sm bg-red-100 text-red-700">
+                        <span class="text-2xl">🛑</span>
+                        <p class="font-semibold mt-1">Weekly Blocker Calls</p>
+                    </div>
+                    <div class="flow-box-sm bg-green-100 text-green-700">
+                        <span class="text-2xl">🎉</span>
+                        <p class="font-semibold mt-1">Weekly Win Calls</p>
+                    </div>
+                    <p class="text-gray-600 text-xs mt-1">(With all Lab Stakeholders)</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="qa-deployment" class="bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold text-blue-main mb-4 text-center">5. Quality Assurance & Deployment</h2>
+            <p class="text-gray-700 mb-6 text-center max-w-2xl mx-auto">
+                Ensuring quality and community alignment is paramount before any prototype is deployed for wider use. Our multi-stage QA process ensures robust and valuable solutions.
+            </p>
+            <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
+                <div class="flow-box">
+                    <span class="text-4xl text-blue-accent">✅</span>
+                    <p class="font-semibold mt-2">Prototype Ready</p>
+                    <p class="text-gray-600 text-xs mt-1">(Pod Deemed Ready)</p>
+                </div>
+                <span class="flow-arrow">➔</span>
+                <div class="flow-box">
+                    <span class="text-4xl text-blue-accent">🧪</span>
+                    <p class="font-semibold mt-2">QA Process Initiated</p>
+                    <p class="text-gray-600 text-xs mt-1">(Lab QA)</p>
+                </div>
+                <span class="flow-arrow">➔</span>
+                <div class="flow-box">
+                    <span class="text-4xl text-blue-accent">🌐</span>
+                    <p class="font-semibold mt-2">QA to All Circles & Community</p>
+                </div>
+                <span class="flow-arrow">➔</span>
+                <div class="flow-box">
+                    <span class="text-4xl text-blue-accent">📊</span>
+                    <p class="font-semibold mt-2">Cluster Review & Final Approval</p>
+                </div>
+                <span class="flow-arrow">➔</span>
+                <div class="flow-box">
+                    <span class="text-4xl text-blue-accent">🚀</span>
+                    <p class="font-semibold mt-2">Deployment for Wider Use</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center mt-12 py-6 border-t border-gray-300">
+        <p class="text-gray-600 text-sm">Deep Labs: Innovating the Future of Deep Funding.</p>
+    </footer>
+
+</body>
+</html>
